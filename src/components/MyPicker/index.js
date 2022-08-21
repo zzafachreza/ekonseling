@@ -34,7 +34,7 @@ export default function MyPicker({
             fontFamily: fonts.secondary[600],
             color: colors.primary,
             left: 10,
-            fontSize: 16,
+            fontSize: 12,
             ...styleLabel,
           }}>
           {label}
@@ -46,7 +46,7 @@ export default function MyPicker({
             fontFamily: fonts.secondary[600],
             color: colors.primary,
             left: 10,
-            fontSize: 14,
+            fontSize: 12,
             marginVertical: 1,
             ...styleLabel,
           }}>

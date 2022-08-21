@@ -22,3 +22,4 @@ export const getData = async key => {
 
 export const urlAPI = 'https://ekonseling.zavalabs.com/api';
 export const urlAvatar = urlAPI.replace("api", "avatar/");
+export const urlLaporan = urlAPI.replace("api", "fotolaporan/");

@@ -248,32 +248,98 @@ export default function Home({ navigation }) {
       <ScrollView>
         <MyGap jarak={10} />
         <MyCarouser />
-        <View style={{
-          padding: 10,
-          marginTop: 0,
-          flexDirection: 'row'
+
+        {user.level == 'Konselor' && <View style={{
+          marginVertical: 20,
+          flexDirection: 'row',
+          justifyContent: 'space-around'
         }}>
-          <Text style={{
-            color: colors.primary,
-            fontFamily: fonts.secondary[600],
-            fontSize: windowWidth / 25,
-          }}>Konsultasi</Text>
-          <View style={{
-            flex: 1,
-            paddingTop: 11,
+
+          <TouchableOpacity onPress={() => navigation.navigate('AddLaporan', {
+            tipe: 'BARU'
+          })} style={{
+            justifyContent: 'center',
+            alignItems: 'center',
           }}>
             <View style={{
-              borderTopColor: colors.primary,
-              marginHorizontal: 10,
-              borderTopWidth: 1,
-            }} />
+              borderWidth: 1,
+              borderColor: colors.zavalabs,
+              borderRadius: 15,
+              padding: 15
+            }}>
+              <Image style={{
+                width: 50,
+                height: 50,
+                resizeMode: 'contain'
+              }} source={require('../../assets/add.png')} />
+            </View>
+
+            <Text style={{
+              fontFamily: fonts.secondary[400],
+              fontSize: windowWidth / 25,
+              marginTop: 10,
+            }}>Laporan Baru</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => navigation.navigate('AddLaporan', {
+            tipe: 'LANJUTAN'
+          })} style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+            <View style={{
+              borderWidth: 1,
+              borderColor: colors.zavalabs,
+              borderRadius: 15,
+              padding: 15
+            }}>
+              <Image style={{
+                width: 50,
+                height: 50,
+                resizeMode: 'contain'
+              }} source={require('../../assets/add2.png')} />
+            </View>
+
+            <Text style={{
+              fontFamily: fonts.secondary[400],
+              fontSize: windowWidth / 25,
+              marginTop: 10,
+            }}>Laporan Lanjutan</Text>
+          </TouchableOpacity>
+
+        </View>}
+
+        {user.level == 'Konseli' && <>
+          <View style={{
+            padding: 10,
+            marginTop: 0,
+            flexDirection: 'row'
+          }}>
+            <Text style={{
+              color: colors.primary,
+              fontFamily: fonts.secondary[600],
+              fontSize: windowWidth / 25,
+            }}>Konsultasi</Text>
+            <View style={{
+              flex: 1,
+              paddingTop: 11,
+            }}>
+              <View style={{
+                borderTopColor: colors.primary,
+                marginHorizontal: 10,
+                borderTopWidth: 1,
+              }} />
+            </View>
           </View>
-        </View>
-        <View style={{
-          flex: 1
-        }}>
-          <FlatList data={konselor} renderItem={__renderItem} />
-        </View>
+          <View style={{
+            flex: 1
+          }}>
+
+
+            <FlatList data={konselor} renderItem={__renderItem} />
+          </View>
+        </>}
+
       </ScrollView>
 
     </SafeAreaView>

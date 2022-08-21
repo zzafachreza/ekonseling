@@ -10,6 +10,7 @@ export default function MyInput({
   label,
   iconname,
   onChangeText,
+  lineheight,
   value,
   keyboardType,
   secureTextEntry,
@@ -56,6 +57,7 @@ export default function MyInput({
         </Text>
       )}
       <TextInput
+
         multiline={multiline}
         autoFocus={autoFocus}
         onFocus={onFocus}

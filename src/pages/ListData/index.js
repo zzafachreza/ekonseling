@@ -44,7 +44,7 @@ export default function ({ navigation, route }) {
   const getDataBarang = () => {
     getData('user').then(res => {
       axios
-        .post(urlAPI + '/transaksi.php', {
+        .post(urlAPI + '/1data_laporan.php', {
           fid_user: res.id,
         })
         .then(x => {
@@ -71,10 +71,10 @@ export default function ({ navigation, route }) {
             style={{
               flex: 1,
               fontSize: windowWidth / 30,
-              color: colors.primary,
-              fontFamily: fonts.secondary[600],
+              color: colors.black,
+              fontFamily: fonts.secondary[400],
             }}>
-            {item.kode}
+            Tanggal
           </Text>
           <Text
             style={{
@@ -87,17 +87,23 @@ export default function ({ navigation, route }) {
           </Text>
         </View>
         <View style={{
-          flex: 1,
+          // flex: 1,
         }}>
+          <Text style={{
+            fontSize: windowWidth / 30,
+            fontFamily: fonts.secondary[400],
+            color: colors.black,
+          }}>Jenis Laporan</Text>
           <Text
             style={{
-              fontSize: windowWidth / 35,
-              // color: colors.white,
-              textAlign: 'center',
-              color: colors.success,
+              fontSize: windowWidth / 30,
               fontFamily: fonts.secondary[600],
+              color: colors.white,
+              paddingHorizontal: 5,
+              textAlign: 'center',
+              backgroundColor: item.tipe == 'BARU' ? colors.primary : colors.secondary,
             }}>
-            {item.status}
+            {item.tipe}
           </Text>
         </View>
       </View>
@@ -118,46 +124,24 @@ export default function ({ navigation, route }) {
             fontSize: windowWidth / 30,
             fontFamily: fonts.secondary[400],
             color: colors.black,
-          }}>Opsi Pengiriman</Text>
+          }}>Permasalahan</Text>
           <Text
             style={{
               fontSize: windowWidth / 30,
               fontFamily: fonts.secondary[600],
               color: colors.black,
             }}>
-            {item.nama_kurir}
+            {item.masalah}
           </Text>
-          <Text
-            style={{
-              fontSize: windowWidth / 30,
-              fontFamily: fonts.secondary[600],
-              color: colors.primary,
-            }}>
-            {item.paket}
-          </Text>
+
 
         </View>
         <View
           style={{
             alignItems: 'flex-end',
-            justifyContent: 'center',
-
             flex: 1,
           }}>
 
-          <Text style={{
-            fontSize: windowWidth / 30,
-            fontFamily: fonts.secondary[400],
-            color: colors.black,
-          }}>Total Pembayaran</Text>
-          <Text
-            style={{
-              fontSize: windowWidth / 20,
-              fontFamily: fonts.secondary[600],
-              color: colors.black,
-            }}>
-            Rp. {new Intl.NumberFormat().format(item.total_bayar)}
-          </Text>
 
         </View>
       </View>

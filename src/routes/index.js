@@ -55,20 +55,32 @@ import {
   AddSatu,
   AddDua,
   Kuis,
+  AddLaporan,
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
 import { colors } from '../utils/colors';
 import { color } from 'react-native-reanimated';
+import { getData } from '../utils/localStorage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const MainApp = () => {
+
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    getData('user').then(r => {
+      setUser(r);
+    })
+  }, [])
+
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="History" component={ListData} />
+
+      {user.level == "Konselor" && <Tab.Screen name="History" component={ListData} />}
+
 
       {/* <Tab.Screen name="Notifikasi" component={Notifikasi} /> */}
       <Tab.Screen name="Account" component={Account} />
@@ -94,6 +106,17 @@ export default function Router() {
           headerShown: false,
         }}
       />
+
+
+      <Stack.Screen
+        name="AddLaporan"
+        component={AddLaporan}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+
       <Stack.Screen
         name="GetStarted"
         component={GetStarted}
