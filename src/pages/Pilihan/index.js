@@ -39,7 +39,7 @@ export default function Pilihan({ navigation, route }) {
 
   const [kirim, setKirim] = useState({
     fid_user: route.params.id_konselor,
-    fid_pemberi: user.id,
+    fid_pemberi: route.params.fid_pemberi,
     nilai: 0,
     info: ''
 
@@ -52,6 +52,7 @@ export default function Pilihan({ navigation, route }) {
     console.log('server sent', kirim);
 
     axios.post(urlAPI + '/1add_rating.php', kirim).then(res => {
+      console.log(res.data)
       getDataRating();
     })
   }
@@ -59,7 +60,8 @@ export default function Pilihan({ navigation, route }) {
   const getDataRating = () => {
 
     axios.post(urlAPI + '/1data_rating.php', {
-      fid_user: route.params.id_konselor
+      fid_user: route.params.id_konselor,
+      fid_pemberi: route.params.fid_pemberi,
     }).then(res => {
       setData(res.data);
       setLoading(false)
@@ -147,16 +149,7 @@ export default function Pilihan({ navigation, route }) {
 
     return <>{myBintang}</>;
   };
-  const RatingComplete = x => {
-    console.warn(x);
-    setKirim({
-      ...kirim,
-      nilai: x
-    })
 
-
-
-  }
   return (
     <SafeAreaView style={{
       flex: 1,
@@ -174,12 +167,19 @@ export default function Pilihan({ navigation, route }) {
           color: colors.primary,
           fontSize: windowWidth / 30
         }}>
-          Beri Bintang
+          Beri Bintang {user.id}
         </Text>
         <Rating
+          startingValue={0}
           ratingBackgroundColor="#0000"
           size={10}
-          onFinishRating={RatingComplete}
+          onFinishRating={x => {
+            setKirim({
+              ...kirim,
+              nilai: x
+            })
+
+          }}
           style={{ padding: 10, }}
         />
       </View>

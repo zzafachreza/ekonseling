@@ -88,7 +88,7 @@ export default function Account({ navigation, route }) {
                 {user.level}
               </Text>
             </View>
-            <View
+            {user.level == 'Konselor' && <View
               style={{
                 marginVertical: 3,
                 padding: 10,
@@ -109,7 +109,7 @@ export default function Account({ navigation, route }) {
                 }}>
                 {user.spesialisasi}
               </Text>
-            </View>
+            </View>}
             <View
               style={{
                 marginVertical: 3,

@@ -186,7 +186,10 @@ export default function Pinjam({ navigation, route }) {
                 flexDirection: 'row'
               }}>
                 <Bintang nilai={item.nilai_konselor} />
-                <TouchableOpacity onPress={() => navigation.navigate('Pilihan', item)} style={{
+                <TouchableOpacity onPress={() => navigation.navigate('Pilihan', {
+                  id_konselor: item.id_konselor,
+                  fid_pemberi: user.id
+                })} style={{
                   paddingHorizontal: 5,
                   marginHorizontal: 5,
                   backgroundColor: colors.primary,

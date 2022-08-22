@@ -72,10 +72,11 @@ export default function GetStarted({ navigation }) {
         </View>
         <Text style={{
           fontFamily: fonts.secondary[800],
-          fontSize: windowWidth / 12,
+          fontSize: windowWidth / 20,
           color: colors.black,
-          marginBottom: 20,
-        }}>KOPI CAP TIGER</Text>
+          textAlign: 'center',
+          marginVertical: 20,
+        }}>EKONSELING POLDA SUMBAR</Text>
       </View>
 
       <MyButton

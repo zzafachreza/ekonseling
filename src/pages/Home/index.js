@@ -34,37 +34,37 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
 
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
+    // const unsubscribe = messaging().onMessage(async remoteMessage => {
 
-      const json = JSON.stringify(remoteMessage);
-      const obj = JSON.parse(json);
+    //   const json = JSON.stringify(remoteMessage);
+    //   const obj = JSON.parse(json);
 
-      // console.log(obj);
+    //   // console.log(obj);
 
-      // alert(obj.notification.title)
+    //   // alert(obj.notification.title)
 
 
 
-      PushNotification.localNotification({
-        /* Android Only Properties */
-        channelId: 'ekonseling', // (required) channelId, if the channel doesn't exist, notification will not trigger.
-        title: obj.notification.title, // (optional)
-        message: obj.notification.body, // (required)
-      });
-    });
+    //   PushNotification.localNotification({
+    //     /* Android Only Properties */
+    //     channelId: 'ekonseling', // (required) channelId, if the channel doesn't exist, notification will not trigger.
+    //     title: obj.notification.title, // (optional)
+    //     message: obj.notification.body, // (required)
+    //   });
+    // });
 
     getDataKategori();
 
     if (isFocused) {
       __getDataUserInfo();
     }
-    return unsubscribe;
+    // return unsubscribe;
   }, [isFocused]);
 
 
   const getDataKategori = () => {
     axios.post(urlAPI + '/1data_konselor.php').then(res => {
-      console.log('kobnselor', res.data);
+      console.warn('data konselor', res.data);
       setKonselor(res.data)
     })
   }

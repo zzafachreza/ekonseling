@@ -126,7 +126,7 @@ export default function EditProfile({ navigation, route }) {
   };
   return (
     <SafeAreaView style={styles.page}>
-      {!loading && <ScrollView style={styles.page}>
+      {!loading && <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
         {/* <Image
         source={require('../../assets/logooren.png')}
         style={styles.image}
