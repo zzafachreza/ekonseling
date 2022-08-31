@@ -285,7 +285,7 @@ export default function Pinjam({ navigation, route }) {
                 fontFamily: fonts.secondary[600],
                 fontSize: windowWidth / 20,
                 color: colors.white,
-              }} >OFF ONLINE</Text>
+              }} >OFFLINE</Text>
             </TouchableOpacity>
           </View>
 

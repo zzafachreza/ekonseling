@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, PermissionsAndroid } from 'react-native';
 import { MyPicker, MyGap, MyInput, MyButton } from '../../components';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
@@ -16,7 +16,7 @@ export default function AddLaporan({ navigation, route }) {
         nama_konseli: '',
         pangkat: '',
         kesatuan: '',
-        status: '',
+        status: 'Menikah',
         alamat: '',
         keluhan: '',
         masalah: 'Narkoba',
@@ -54,6 +54,30 @@ export default function AddLaporan({ navigation, route }) {
             ...data,
             tanggal: today,
         });
+    };
+
+    const requestCameraPermission = async () => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.CAMERA,
+                {
+                    title: "Izinkan Aplikasi untuk akses Kamera",
+                    message:
+                        "Cool Photo App needs access to your camera " +
+                        "so you can take awesome pictures.",
+                    buttonNeutral: "Ask Me Later",
+                    buttonNegative: "Cancel",
+                    buttonPositive: "OK"
+                }
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log("You can use the camera");
+            } else {
+                console.log("Camera permission denied");
+            }
+        } catch (err) {
+            console.warn(err);
+        }
     };
 
     const showMode = currentMode => {
@@ -187,7 +211,13 @@ export default function AddLaporan({ navigation, route }) {
         );
     };
 
+
+
+
+
     useEffect(() => {
+
+        requestCameraPermission();
         const Today = new Date();
         const dd = String(Today.getDate()).padStart(2, '0');
         const mm = String(Today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -276,7 +306,27 @@ export default function AddLaporan({ navigation, route }) {
                 <MyInput value={data.nama_konseli} onChangeText={x => setData({ ...data, nama_konseli: x, })} label='Nama Konseli :' iconname='create-outline' /><MyGap jaral={10} />
                 <MyInput value={data.pangkat} onChangeText={x => setData({ ...data, pangkat: x, })} label='Pangkat / NRP / NIP :' iconname='create-outline' /><MyGap jaral={10} />
                 <MyInput value={data.kesatuan} onChangeText={x => setData({ ...data, kesatuan: x, })} label='Kesatuan :' iconname='create-outline' /><MyGap jaral={10} />
-                <MyInput value={data.status} onChangeText={x => setData({ ...data, status: x, })} label='Status :' iconname='create-outline' /><MyGap jaral={10} />
+
+                <MyPicker
+                    onValueChange={x =>
+                        setData({
+                            ...data,
+                            status: x,
+                        })
+                    }
+                    iconname="list"
+                    label="Status :"
+                    data={[
+                        { label: 'Menikah', value: 'Menikah', },
+                        { label: 'Belum Menikah', value: 'Belum Menikah', },
+
+
+
+                    ]}
+                />
+
+
+
                 <MyInput multiline value={data.alamat} onChangeText={x => setData({ ...data, alamat: x, })} label='Alamat :' iconname='create-outline' /><MyGap jaral={10} />
                 <MyInput multiline value={data.keluhan} onChangeText={x => setData({ ...data, keluhan: x, })} label='Keluhan Konseli :' iconname='create-outline' /><MyGap jaral={10} />
 

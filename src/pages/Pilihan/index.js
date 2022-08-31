@@ -167,7 +167,7 @@ export default function Pilihan({ navigation, route }) {
           color: colors.primary,
           fontSize: windowWidth / 30
         }}>
-          Beri Bintang {user.id}
+          Beri Bintang
         </Text>
         <Rating
           startingValue={0}
