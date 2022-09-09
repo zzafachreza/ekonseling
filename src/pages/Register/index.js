@@ -56,11 +56,12 @@ export default function Register({ navigation }) {
     nama_lengkap: '',
     nrp: '',
     spesialisasi: '',
-    level: '',
+    level: 'Konseli',
     email: '',
     password: '',
     telepon: '62',
-    kota: ''
+    kota: 'Kabupaten Agam - Sumatera Barat',
+    fid_kota: '12'
   });
 
   const simpan = () => {
@@ -127,6 +128,14 @@ export default function Register({ navigation }) {
         });
     }
   };
+
+  useEffect(() => {
+
+    axios.post(urlAPI + '/1kota.php').then(res => {
+      console.warn('get user', res.data);
+      setKota(res.data);
+    })
+  }, [])
 
 
 
@@ -289,6 +298,8 @@ export default function Register({ navigation }) {
 
 
 
+
+
         <MyGap jarak={10} />
         <MyInput
           label="E - mail *"
@@ -316,60 +327,18 @@ export default function Register({ navigation }) {
           }
         />
         <MyGap jarak={10} />
-        <MyInput
-          label="Wilayah *"
-          iconname="location"
-          value={data.kota}
-          onChangeText={value => {
-            setData({
-              ...data,
-              kota: value,
-            })
-            if (value.length > 0) {
-              axios.post(urlAPI + '/1kota.php', {
-                key: value
-              }).then(res => {
-                setOpen(true);
-                console.warn('get user', res.data);
-                setKota(res.data);
-              })
-            }
-          }
-          }
-        />
-        <MyGap jarak={10} />
-        {open && <ScrollView showsVerticalScrollIndicator={false} style={{
-          backgroundColor: colors.border
-        }}>
 
-          <TouchableOpacity onPress={() => setOpen(false)} style={{
-            backgroundColor: colors.primary,
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-            paddingRight: 10,
-          }}>
-            <Icon name='close' type='ionicon' color={colors.white} />
-          </TouchableOpacity>
+        <MyPicker onValueChange={x => {
 
-          {kota.map(i => {
-            return (
-              <TouchableOpacity onPress={() => {
-                setData({
-                  ...data,
-                  fid_kota: i.id,
-                  kota: i.kota
-                });
-                setOpen(false);
-              }} style={{
-                padding: 10,
-                backgroundColor: colors.white,
-                marginVertical: 1,
-              }}>
-                <Text>{i.kota}</Text>
-              </TouchableOpacity>
-            )
-          })}
-        </ScrollView>}
+          let kt = x.split("#");
+
+          setData({
+            ...data,
+            kota: kt[1],
+            fid_kota: kt[0]
+          })
+        }} label='Wilayah*' iconname='loaction' data={kota} />
+
         <MyGap jarak={10} />
         <MyInput
           label="Alamat lengkap *"

@@ -74,8 +74,9 @@ export default function MyInput({
           paddingLeft: 10,
           color: colors.black,
           fontSize: 12,
-          height: height,
           fontFamily: fonts.primary[400],
+          height: height,
+
           ...styleInput,
         }}
       />
